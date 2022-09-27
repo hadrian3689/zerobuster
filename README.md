@@ -19,7 +19,7 @@ python3 zerobuster.py -u http://findme.blah/ -e '.txt .php .html' -w list.txt
 
 For help menu:
 ```
-python3 dirfinder.py -h
+python3 zerobuster.py -h
 ```
 
 ## Disclaimer
