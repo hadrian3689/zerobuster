@@ -4,7 +4,7 @@ import argparse
 import signal
 
 class Zero_Finder():
-    def __init__(self,target,file,extensions,output_file,blacklist_status_code,threads,header,user_agent,proxy):
+    def __init__(self,target,file,extensions,output_file,blacklist_status_code,threads,header,cookie,user_agent,proxy):
         self.target = target
         self.file = file
         self.extensions = extensions
@@ -12,6 +12,7 @@ class Zero_Finder():
         self.blacklist_status_code = blacklist_status_code
         self.threads = threads
         self.header = header
+        self.cookie = cookie
         self.user_agent = user_agent
         self.proxy = proxy
         
@@ -39,6 +40,7 @@ class Zero_Finder():
         headers = {
             "Connection":"close"
         }
+        
         proxy_set = {}
 
         if args.a:
@@ -48,6 +50,9 @@ class Zero_Finder():
             proxy_set = {
                 "http": "http://" + self.proxy
             }
+        
+        if args.c:
+            headers['Cookie'] = self.cookie
 
         if args.H:
             header_list = self.header.split(': ')
@@ -131,13 +136,14 @@ if __name__ == "__main__":
     parser.add_argument('-b', metavar='<Blacklist Status Code>',help="Example: -b 500", required=False)
     parser.add_argument('-t', metavar='<Threads>',default="10",help="Example: -t 100. Default 10", required=False)
     parser.add_argument('-H', metavar='<Header>',help="Example -H 'Parameter: Value", required=False)
+    parser.add_argument('-c', metavar='<Cookie>',help="Example -c 'Cookie Value", required=False)
     parser.add_argument('-a', metavar='<User-Agent>',help="Example: -a Linux", required=False)
     parser.add_argument('-p', metavar='<Proxies>',help="Example: -p 127.0.0.1:8080", required=False)
 
     args = parser.parse_args()
 
     try:
-        Zero_Finder(args.u,args.w,args.e,args.o,args.b,args.t,args.H,args.a,args.p)
+        Zero_Finder(args.u,args.w,args.e,args.o,args.b,args.t,args.H,args.c,args.a,args.p)
     except KeyboardInterrupt:
         print("Bye Bye") 
         exit()
