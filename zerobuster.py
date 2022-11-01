@@ -3,7 +3,7 @@ import requests
 import argparse
 import signal
 
-class Zero_Finder():
+class Zero_Buster():
     def __init__(self,target,file,extensions,output_file,blacklist_status_code,threads,header,cookie,user_agent,proxy):
         self.target = target
         self.file = file
@@ -143,7 +143,7 @@ if __name__ == "__main__":
     args = parser.parse_args()
 
     try:
-        Zero_Finder(args.u,args.w,args.e,args.o,args.b,args.t,args.H,args.c,args.a,args.p)
+        Zero_Buster(args.u,args.w,args.e,args.o,args.b,args.t,args.H,args.c,args.a,args.p)
     except KeyboardInterrupt:
         print("Bye Bye") 
         exit()
